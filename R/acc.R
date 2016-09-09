@@ -1,4 +1,4 @@
-acc = function(x, lag = 1){# HAAAALOOOOhhh
+acc = function(x, lag = 1){
   n = length(x)
   x1 = x[1:(n-lag)]
   x2 = x[(lag+1):n]
