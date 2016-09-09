@@ -1,0 +1,16 @@
+{
+    "contents" : "\\name{bp.test}\n\\alias{bp.test}\n\\encoding{latin1}\n\\title{Breusch Pagan test}\n\\description{Breusch Pagan test for heteroskedastic errors.}\n\\usage{\nbp.test(mod, varmod = NULL, koenker = T, sig.level = 0.05, hyp = T, details = F, data = list()) \n}\n\\arguments{\n \\item{mod}{Estimated linear model object or formula.}\n \\item{varmod}{Formula object (starting with tilde ~) specifying the terms of regressors that explain sigma squared for each observation. If not specified the regular model \\code{mod} is used.}\n \\item{koenker}{Logical value specifying whether Koenker's studentized version or the original Breusch Pagan test should be performed.}\n \\item{sig.level}{Significance level. Default value: sig.level = 0.05.}\n \\item{hyp}{Logical value indicating whether the Hypotheses should be returned.}\n \\item{details}{Logical value indicating whether specific details about the test should be returned.}\n \\item{data}{If \\code{mod} is a formula then the corresponding dataframe has to be specified.}\n}\n\\details{Details zur Theorie hinter der Funktion.\n\nUnder \\eqn{H_0} the test statistic of the Breusch-Pagan test follows a\nchi-squared distribution with \\code{parameter} (the number of regressors without\nthe constant in the model) degrees of freedom.\n}\n\n\\value{List including:\n\n\\tabular{ll}{\n\\code{hyp} \\tab Character matrix of hypotheses (if hyp = T).\\cr\n\\code{results} \\tab A dataframe of basic test results.\\cr\n\\code{hreg} \\tab Matrix of aux. regression results.\\cr\n\\code{stats} \\tab Additional statistic of aux. regression.\\cr\n\\code{nulldist} \\tab Type of the Null distribution with its parameters.\\cr\n}\n}\n\n\\references{\nT.S. Breusch & A.R. Pagan (1979),\nA Simple Test for Heteroscedasticity and Random Coefficient Variation.\n\\emph{Econometrica} \\bold{47}, 1287--1294\n\nR. Koenker (1981), A Note on Studentizing a Test for Heteroscedasticity.\n\\emph{Journal of Econometrics} \\bold{17}, 107--112.\n}\n\n\\seealso{\n\\code{\\link{wh.test}}, \\code{\\link[lmtest]{bptest}}\n}\n\n\\examples{\n# BP test with Koenker's studentized residuals\nX <- bp.test(wage ~ educ + age, data = data.wage, koenker = F)\nX\n\n# A white test for the same model (auxiliary regression specified by \\code{varmod})\nbp.test(wage ~ educ + age, varmod = ~ (educ + age)^2 + I(educ^2) + I(age^2), data = data.wage)\n\n# Similar test\nwh.test(wage ~ educ + age, data = data.wage)\n\n# Plot the test result\nplot(X)\n\n}\n\\keyword{htest}\n",
+    "created" : 1470445423234.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1243097264",
+    "id" : "36F91DAC",
+    "lastKnownWriteTime" : 1454438108,
+    "path" : "G:/00WORK/00Forschung/00Pub/Buch/Oekonometrie/OekoUB/Package/desk/man/bp.test.Rd",
+    "project_path" : "man/bp.test.Rd",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_doc"
+}

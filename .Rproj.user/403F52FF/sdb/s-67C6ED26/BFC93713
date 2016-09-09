@@ -1,0 +1,16 @@
+{
+    "contents" : "ar1sim = function(n = 50, u0 = 0, rho, var.e = 1, details = F, seed = NULL) {\n  set.seed(seed)\n  e = rnorm(n, 0, var.e) # random error\n  u = numeric(n) # Generiere Nullvektor\n  u[1] = u0 # Erste Beobachtung\n  for (t in 2:(n)){ # Restliche Beobachtungen\n    u[t] = rho * u[t-1] + e[t]\n  }\n  out = list(u.sim = u, n = n, rho = rho, e.sim = e)\n  \n  attr(out, \"details\") = if (details) {T} else {F}\n  attr(out, \"type\") = \"ar1sim\"\n  class(out) = c(\"desk\")\n  return(out)\n}",
+    "created" : 1470443219640.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "553392987",
+    "id" : "BFC93713",
+    "lastKnownWriteTime" : 1458548684,
+    "path" : "G:/00WORK/00Forschung/00Pub/Buch/Oekonometrie/OekoUB/Package/desk/R/ar1sim.R",
+    "project_path" : "R/ar1sim.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

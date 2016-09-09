@@ -1,0 +1,16 @@
+{
+    "contents" : "arguments <- function (fun, width = options(\"width\")$width) {\n    out = paste(deparse(args(fun))[-length(deparse(args(fun)))], \n        collapse = \"\", sep = \"--\")\n    out = gsub(\"function (\", \"\", out, fixed = T)\n    out = gsub(\") \", \"\", out, fixed = T)\n    out = gsub(\"     \", \" \", out, fixed = T)\n    if (out == \"\") \n        stop(\"Arguments of function are not well specified\")\n    if (grepl(\"\\\\.\\\\.\\\\.\", out) == 1 & regexpr(\"\\\\.\\\\.\\\\.\", out) == \n        1) {\n        out = gsub(\"\\\\.\\\\.\\\\., \", \"\", out)\n        out = eval(parse(text = paste0(\"alist(\", out, \")\")))\n        id = sapply(out, is.character)\n        fx = as.character(out)\n        fx[id] = paste0(\"\\\"\", fx[id], \"\\\"\")\n        o = paste0(names(out), ifelse(names(out) != \"\", \" = \", \n            \"\"), fx)\n        o = c(\"...\", o)\n    }else if (grepl(\"\\\\.\\\\.\\\\.\", out) == 1 & regexpr(\"\\\\.\\\\.\\\\.\", \n        out) != 1) {\n        out = gsub(\", \\\\.\\\\.\\\\.\", \" \", out)\n        out = eval(parse(text = paste0(\"alist(\", out, \")\")))\n        id = sapply(out, is.character)\n        fx = as.character(out)\n        fx[id] = paste0(\"\\\"\", fx[id], \"\\\"\")\n        o = paste0(names(out), ifelse(names(out) != \"\", \" = \", \n            \"\"), fx)\n        o = c(o, \"...\")\n    }else {\n        out = eval(parse(text = paste0(\"alist(\", out, \")\")))\n        id = sapply(out, is.character)\n        fx = as.character(out)\n        fx[id] = paste0(\"\\\"\", fx[id], \"\\\"\")\n        o = paste0(names(out), ifelse(names(out) != \"\", \" = \", \n            \"\"), fx)\n    }\n    ix = nchar(o)\n    br.upper = width * 0.8\n    br.lower = width * 0.5\n\n    repeat{\n        int = cut(cumsum(ix), seq(0, 1000, br.upper))\n        lx = table(int) != 0\n        l = unlist(lapply(1:length(levels(int)), function(x) paste(paste(c(o[int == \n            levels(int)[x]], \"\"), collapse = \", \"), \"\\n\")))\n        l[length(l[lx])] = gsub(\",  \\n\", \"\", l[length(l[lx])], \n            fixed = T)\n\n        #         if(any(nchar(l[lx]) > width)) next\n        if (length(l[lx]) == 1 | length(l[lx]) == 2) break\n        m = sd(sapply((l[lx])[-length(l[lx])], nchar))\n        if(m < 10) break\n        br.upper = br.upper - 1\n        if (br.lower >= br.upper) \n            break\n    }\n    cat(l[lx])\n}",
+    "created" : 1473172501710.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1869653719",
+    "id" : "97B4E89A",
+    "lastKnownWriteTime" : 1473172530,
+    "path" : "D:/Users/s4anstep/Dropbox/Dropbox/OekoUB/Package/desk/R/arguments.R",
+    "project_path" : "R/arguments.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
